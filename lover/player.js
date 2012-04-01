@@ -13,6 +13,9 @@ function Player(x, y, unitWidth, imagePath) {
   this.breathRegenRate = 2
   this.breathLoseRate = 5
   this.breathBarX = Player.BREATH_BAR_MARGIN
+  this.heartImage = new Image()
+  this.heartImage.src = "heart.png"
+  this.heartScale = 0.1
 }
 
 Player.prototype = Object.create(new Character())
@@ -97,6 +100,12 @@ Player.prototype.draw = function() {
     this.y += 1
   }
   Character.prototype.draw.call(this)
+  if (this.besideLover) {
+    var context = lover.context
+   /* if (scale < 
+    this.heartScale -= 0.01*/
+    context.drawImage(this.heartImage, this.x - 10, this.y - 10, 20, 20)
+  }
 }
 
 Player.prototype.die = function () {
