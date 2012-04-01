@@ -7,6 +7,11 @@ body {
   text-align: center;
 }
 
+* {
+  font-family: DjbDoodlieBeans;
+  text-shadow: 3px 3px 3px gray;
+}
+
 #container {
   background: #fff;
   display: inline-block;
@@ -17,18 +22,41 @@ body {
 }
 
 #viewport {
-  box-shadow: inset 0 0 10px #aaa;
   border: 1px solid #888;
 }
 
 #canvas-title {
   width: 100%;
   min-width: 800px;
-  font-family: DjbDoodlieBeans;
   font-size: 60px;
   color: yellow;
-  text-shadow: 3px 3px 3px gray;
   position: absolute;
   top: 0;
   left: 0;
+}
+
+#highscore {
+  width: 100%;
+  min-width: 800px;
+  font-size: 20px;
+}
+
+#highscore > div:first-child {
+  font-size: 60px;
+  color: red;
+}
+
+#highscore > div:nth-child(2) {
+  font-size: 50px;
+  color: blue;
+}
+
+#highscore > div:nth-child(3) {
+  font-size: 35px;
+  color: purple;
+}
+
+#highscore-header {
+  margin-top: 40px;
+  font-size: 40px;
 }

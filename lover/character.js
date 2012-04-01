@@ -1,12 +1,10 @@
 Character.FRAME_COUNT = 4
 
-function Character(x, y, unitWidth, canvasWidth, canvasHeight, imagePath) {
+function Character(x, y, unitWidth, imagePath) {
   this.pace = 5
   this.x = x || 0
   this.y = y || 0
   this.unitWidth = unitWidth || 20
-  this.canvasWidth = canvasWidth || 800
-  this.canvasHeight = canvasHeight || 600
   this.spriteFrame = 0
   this.orientation = 0
   this.scale = 1.0
@@ -77,7 +75,7 @@ Character.prototype = {
 
   moveDown : function () {
     var y = this.y + this.pace
-    if (y < this.canvasHeight)
+    if (y < lover.canvas.height)
       this.y = y
     this.orientation = 0
   },
@@ -98,7 +96,7 @@ Character.prototype = {
 
   moveRight : function () {
     var x = this.x + this.pace
-    if (x < this.canvasWidth)
+    if (x < lover.canvas.width)
       this.x = x
     this.orientation = 2
   },
@@ -134,23 +132,15 @@ Character.prototype = {
     return thisX1 <= x2 && thisX2 >= x1 && thisY1 <= y2 && thisY2 >= y1
   },
 
-  draw : function (context) {
+  draw : function () {
+    var context = lover.context
     var width = Math.round(this.spriteWidth * this.scale)
     var height = Math.round(this.spriteHeight * this.scale)
-    context.save()
     context.globalAlpha = this.opacity
-    context.translate(this.x - width / 2, this.y - height / 2)
     context.drawImage(this.image, this.spriteFrame * this.spriteWidth,
                       this.orientation * this.spriteHeight,
-                      this.spriteWidth, this.spriteHeight, 0, 0,
+                      this.spriteWidth, this.spriteHeight,
+                      this.x - width / 2, this.y - height / 2,
                       width, height)
-    context.restore()
   },
-
-  clear : function (context) {
-    context.save()
-    context.translate(-this.spriteWidth / 2, -this.spriteHeight / 2)
-    context.clearRect(this.x, this.y, this.spriteWidth, this.spriteHeight)
-    context.restore()
-  }
 }
