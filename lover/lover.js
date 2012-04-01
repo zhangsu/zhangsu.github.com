@@ -121,6 +121,7 @@ lover.context = lover.canvas.getContext('2d')
       checkEnemyCollisions()
       updateBreaths()
       updateScore()
+      updateRecoverySound()
     }
     refresh()
   }, 50)
@@ -307,6 +308,14 @@ lover.context = lover.canvas.getContext('2d')
     } else {
       female.besideLover = false
     }
+  }
+
+  function updateRecoverySound() {
+    var sound = document.getElementById('recovery-sound')
+    if (male.besideLover || female.besideLover)
+      sound.play()
+    else
+      sound.pause()
   }
 
   function updateEnemyPositions() {
