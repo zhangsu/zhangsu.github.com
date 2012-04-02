@@ -7,21 +7,21 @@ function Player(x, y, unitWidth, imagePath) {
   Character.call(this, x, y, unitWidth, imagePath)
   this.pace = 3
   this.retainCursorDirectionCount = Player.RETAIN_CURSOR_DIRECTION_COUNT
-  this.besideLover = false
+  this.huggingLover = false
   this.breath = 1000
   this.maxBreath = 1000
   this.breathRegenRate = 2
   this.breathLoseRate = 5
   this.breathBarX = Player.BREATH_BAR_MARGIN
   this.heartImage = new Image()
-  this.heartImage.src = "heart.png"
+  this.heartImage.src = "img/heart.png"
   this.heartScale = 0.1
 }
 
 Player.prototype = Object.create(new Character())
 
 Player.prototype.updateBreath = function () {
-  if (this.besideLover) {
+  if (this.huggingLover) {
     if (this.breath < this.maxBreath) {
       this.breath += this.breathRegenRate
       if (this.breath > this.maxBreath)
@@ -90,6 +90,7 @@ Player.prototype.drawBreathBar = function() {
 }
 
 Player.prototype.draw = function() {
+  Character.prototype.draw.call(this)
   if (!this.alive) {
     if (this.scale < 0.01)
       return
@@ -98,9 +99,7 @@ Player.prototype.draw = function() {
     if (this.opacity < 0)
     this.opacity = 0
     this.y += 1
-  }
-  Character.prototype.draw.call(this)
-  if (this.besideLover) {
+  } else if (this.huggingLover) {
     var context = lover.context
    /* if (scale < 
     this.heartScale -= 0.01*/
@@ -110,4 +109,5 @@ Player.prototype.draw = function() {
 
 Player.prototype.die = function () {
   this.alive = false
+  this.huggingLover = false
 }

@@ -20,6 +20,7 @@ lover.context = lover.canvas.getContext('2d')
 
       cursorX, cursorY, cursorOnScreen,
       sampleSpaceX, sampleSpaceY,
+      maleHuggingFemale, femaleHuggingMale,
       score = 0,
       started = false
 
@@ -144,7 +145,7 @@ lover.context = lover.canvas.getContext('2d')
 
   function restart() {
     male = new Player(randInt(0, canvas.width / 2), randInt(0, canvas.height),
-                      16, "male.png"),
+                      16, "img/male.png"),
     male.pace = 4
     male.breathBarX = Player.BREATH_BAR_MARGIN
     male.breath = male.maxBreath = 1200
@@ -152,7 +153,7 @@ lover.context = lover.canvas.getContext('2d')
     male.breathLoseRate = 4
 
     female = new Player(randInt(canvas.width / 2, canvas.width),
-                        randInt(0, canvas.height), 16, "female.png")
+                        randInt(0, canvas.height), 16, "img/female.png")
     female.pace = 5
     female.breathBarX = canvas.width - Player.BREATH_BAR_WIDTH
                         - Player.BREATH_BAR_MARGIN
@@ -186,7 +187,7 @@ lover.context = lover.canvas.getContext('2d')
   }
 
   function spawnEnemy() {
-    enemies.push(new Enemy(50, "giantsquid.png"))
+    enemies.push(new Enemy(50, "img/giantsquid.png"))
   }
 
   function refresh() {
@@ -279,11 +280,10 @@ lover.context = lover.canvas.getContext('2d')
       male.moveDown()
     else {
       male.moving = false
-      return
     }
 
     if (male.colliding(female)) {
-      male.besideLover = true
+      male.huggingLover = true
       if (leftKeyDown)
         male.undoMoveLeft()
       else if (rightKeyDown)
@@ -294,7 +294,7 @@ lover.context = lover.canvas.getContext('2d')
         male.undoMoveDown()
       male.moving = false
     } else {
-      male.besideLover = false
+      male.huggingLover = false
     }
   }
 
@@ -303,16 +303,16 @@ lover.context = lover.canvas.getContext('2d')
       return
     var direction = female.followCursor(cursorX, cursorY)
     if (female.colliding(male)) {
-      female.besideLover = true
+      female.huggingLover = true
       female.undoMove(direction)
     } else {
-      female.besideLover = false
+      female.huggingLover = false
     }
   }
 
   function updateRecoverySound() {
     var sound = document.getElementById('recovery-sound')
-    if (male.besideLover || female.besideLover)
+    if (male.huggingLover || female.huggingLover)
       sound.play()
     else
       sound.pause()
