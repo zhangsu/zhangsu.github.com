@@ -17,12 +17,16 @@ lover.context = lover.canvas.getContext('2d')
       rightKeyDown = false,
       downKeyDown = false,
       upKeyDown = false,
-
-      cursorX, cursorY, cursorOnScreen,
+      cursorX, cursorY, hasFocus = true,
+      cursorOnScreen,
       sampleSpaceX, sampleSpaceY,
       maleHuggingFemale, femaleHuggingMale,
       score = 0,
       started = false
+  
+  var bgMusic = document.getElementById('bg-music')
+  bgMusic.volume = 0.3
+  bgMusic.play()
 
   lover.canvas.setAttribute('width', canvas.width)
   lover.canvas.setAttribute('height', canvas.height)
@@ -89,6 +93,11 @@ lover.context = lover.canvas.getContext('2d')
   }, true);
 
   window.addEventListener("mousemove", function (e) {
+    if (!hasFocus) {
+      cursorOnScreen = false
+      female.huggingLover = false
+      return
+    }
     var x = e.pageX - canvas.offsetLeft
     var y = e.pageY - canvas.offsetTop
     if (0 < x && x < canvas.width && 0 < y && y < canvas.height) {
@@ -103,12 +112,16 @@ lover.context = lover.canvas.getContext('2d')
     }
   }, true)
 
+  window.addEventListener("focus", function (e) {
+    hasFocus = true
+    leftKeyDown = upKeyDown = rightKeyDown = downKeyDown = false
+    if (female)
+      female.moving = false
+  }, true)
+
   window.addEventListener("blur", function (e) {
-    leftKeyDown = false
-    upKeyDown = false
-    rightKeyDown = false
-    downKeyDown = false
-    cursorOnScreen = false
+    hasFocus = false
+    leftKeyDown = upKeyDown = rightKeyDown = downKeyDown = false
     if (female)
       female.moving = false
   }, true)
@@ -128,7 +141,6 @@ lover.context = lover.canvas.getContext('2d')
   }, 50)
 
   function gotoPrepareScreen() {
-    score = 0
     started = false
     var clickToContinue = window.addEventListener("click", cont)
     var pressToContinue = window.addEventListener("keypress", cont)
@@ -145,26 +157,22 @@ lover.context = lover.canvas.getContext('2d')
 
   function restart() {
     male = new Player(randInt(0, canvas.width / 2), randInt(0, canvas.height),
-                      16, "img/male.png"),
-    male.pace = 4
-    male.breathBarX = Player.BREATH_BAR_MARGIN
-    male.breath = male.maxBreath = 1200
-    male.breathRegenRate = 2
-    male.breathLoseRate = 4
-
+                      16, "male", "img/male.png"),
     female = new Player(randInt(canvas.width / 2, canvas.width),
-                        randInt(0, canvas.height), 16, "img/female.png")
-    female.pace = 5
-    female.breathBarX = canvas.width - Player.BREATH_BAR_WIDTH
-                        - Player.BREATH_BAR_MARGIN
-    female.breath = female.maxBreath = 1000
-    female.breathRegenRate = 4
-    female.breathLoseRate = 6
+                        randInt(0, canvas.height), 16, "female", "img/female.png")
     enemies = []
     // Spawn enemies.
     for (var i = 0; i < 20; ++i)
       spawnEnemy()
     started = true
+    score = 0
+
+    var boyDeathSound = document.getElementById("boy-death-sound")
+    var girlDeathSound = document.getElementById("girl-death-sound")
+    boyDeathSound.pause()
+    girlDeathSound.pause()
+    boyDeathSound.currentTime = 0
+    girlDeathSound.currentTime = 0
   }
 
   function showHighscores() {
@@ -207,26 +215,26 @@ lover.context = lover.canvas.getContext('2d')
       male.drawBreathBar()
     if (female)
       female.drawBreathBar()
-    if (started)
-      drawScore()
-    else
+    drawScore()
+    if (!started)
       drawPrepareScreen()
     context.drawImage(lover.canvas, 0, 0)
   }
 
   function drawPrepareScreen() {
     var context = lover.context
-    context.fillStyle = 'black'
+    context.fillStyle = "black"
     context.fillRect(0, 0, canvas.width, canvas.height)
     var x = canvas.width / 2
     context.textAlign = "center"
-    context.fillStyle = 'white'
+    context.fillStyle = "white"
     context.font = "20pt Arial"
     context.fillText("Move mouse to move the girl", x, 150)
     context.fillText("Use arrow keys to move the boy", x, 200)
-    context.fillText("Move toward and face each other to survive!", x, 300)
+    context.fillText("Avoid the evil sea monsters!", x, 300)
+    context.fillText("Move toward and hug each other to survive!", x, 350)
     context.font = "30pt Arial"
-    context.fillText("Continue", x, 400)
+    context.fillText("Continue", x, 450)
   }
 
   function drawFullscreenMask() {
@@ -299,10 +307,12 @@ lover.context = lover.canvas.getContext('2d')
   }
 
   function updateFemalePosition() {
-    if (!female.alive || !cursorOnScreen)
+    if (!female.alive)
       return
-    var direction = female.followCursor(cursorX, cursorY)
-    if (female.colliding(male)) {
+    var direction
+    if (cursorOnScreen)
+      direction = female.followCursor(cursorX, cursorY)
+    if (female.colliding(male) && cursorOnScreen) {
       female.huggingLover = true
       female.undoMove(direction)
     } else {

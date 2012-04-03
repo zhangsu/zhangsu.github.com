@@ -1,4 +1,4 @@
-Enemy.RETAIN_DIRECTION_COUNT = 10
+Enemy.TURTLE_MOVE_COUNT = 10
 Enemy.SPAWN_AREA_LENGTH = 100
 
 function Enemy(unitWidth, imagePath) {
@@ -27,7 +27,7 @@ function Enemy(unitWidth, imagePath) {
     break
   }
   this.pace = 5
-  this.retainDirectionCount = Enemy.RETAIN_DIRECTION_COUNT
+  this.turtleMoveCount = Enemy.TURTLE_MOVE_COUNT
 }
 
 Enemy.prototype = Object.create(new Character())
@@ -42,10 +42,10 @@ Enemy.prototype.move = function (width, height) {
   else if (this.y >= height)
     this.moveUp()
   else {
-    if ((--this.retainDirectionCount) > 0)
+    if ((--this.turtleMoveCount) > 0)
       this.moveToward(this.orientation)
     else {
-      this.retainDirectionCount = Enemy.RETAIN_DIRECTION_COUNT
+      this.turtleMoveCount = Enemy.TURTLE_MOVE_COUNT
       this.moveToward(randInt(0, 4))
     }
   }
