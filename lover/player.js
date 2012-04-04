@@ -26,7 +26,7 @@ function Player(x, y, unitWidth, gender, imagePath) {
     this.breathLoseRate = 4
   } else if (gender == "female") {
     this.pace = 6
-    this.breathBarX = lover.canvas.width - Player.BREATH_BAR_WIDTH
+    this.breathBarX = Lover.canvas.width - Player.BREATH_BAR_WIDTH
                         - Player.BREATH_BAR_MARGIN
     this.breath = this.maxBreath = 1000
     this.breathRegenRate = 4
@@ -58,38 +58,38 @@ Player.prototype.updateBreath = function () {
   }
 }
 
-Player.prototype.cursorDirection = function (deltaX, deltaY, cursorX, cursorY) {
+Player.prototype.cursorDirection = function (deltaX, deltaY, mouseX, mouseY) {
   if ((--this.turtleMoveCount) > 0)
     return this.orientation
   else
     this.turtleMoveCount = Player.TURTLE_MOVE_DURATION
 
   if (deltaX < deltaY)
-    return this.y < cursorY ? 0 : 3
+    return this.y < mouseY ? 0 : 3
   else
-    return this.x < cursorX ? 2 : 1
+    return this.x < mouseX ? 2 : 1
 }
 
-Player.prototype.followCursor = function (cursorX, cursorY) {
-  var deltaX = Math.abs(cursorX - this.x),
-      deltaY = Math.abs(cursorY - this.y)
+Player.prototype.followCursor = function (mouseX, mouseY) {
+  var deltaX = Math.abs(mouseX - this.x),
+      deltaY = Math.abs(mouseY - this.y)
   if (deltaX <= this.pace && deltaY <= this.pace) {
     this.moving = false
     return
   }
 
-  var direction = this.cursorDirection(deltaX, deltaY, cursorX, cursorY)
+  var direction = this.cursorDirection(deltaX, deltaY, mouseX, mouseY)
   this.moveToward(direction)
   this.moving = true
   return direction
 }
 
 Player.prototype.drawBreathBar = function() {
-  var context = lover.context,
+  var context = Lover.context,
       radius = Player.BREATH_BAR_WIDTH / 2
   context.save()
   context.translate(this.breathBarX,
-                    (lover.canvas.height - Player.BREATH_BAR_HEIGHT) / 2)
+                    (Lover.canvas.height - Player.BREATH_BAR_HEIGHT) / 2)
   context.globalAlpha = 0.5
   context.lineWidth = 3
   context.beginPath()
@@ -112,7 +112,7 @@ Player.prototype.drawBreathBar = function() {
 }
 
 Player.prototype.animateHeart = function() {
-  var context = lover.context
+  var context = Lover.context
   context.save()
   this.heartScale += 0.01
   if (this.heartScale >= 2 * Player.HEART_SCALE)

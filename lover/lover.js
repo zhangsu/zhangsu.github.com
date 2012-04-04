@@ -1,130 +1,52 @@
-function randInt(leftBound, rightBound) {
-  return Math.floor(Math.random() * (rightBound - leftBound)) + leftBound
-}
-
-var lover = {
+var Lover = {
   canvas : document.createElement('canvas'),
-  mask : document.createElement('canvas')
+  mask : document.createElement('canvas'),
+  randInt: function (leftBound, rightBound) {
+    return Math.floor(Math.random() * (rightBound - leftBound)) + leftBound
+  }
 }
 
-lover.context = lover.canvas.getContext('2d')
+Lover.context = Lover.canvas.getContext('2d')
 
 ;(function () {
   var canvas = document.getElementById('viewport'),
       context = canvas.getContext('2d'),
-      male, female, enemies = [],
-      leftKeyDown = false,
-      rightKeyDown = false,
-      downKeyDown = false,
-      upKeyDown = false,
-      cursorX, cursorY, hasFocus = true,
-      cursorOnScreen,
-      sampleSpaceX, sampleSpaceY,
-      maleHuggingFemale, femaleHuggingMale,
+      offscreenCanvas = Lover.canvas,
+      offscreenContext = Lover.context,
+      mask = Lover.mask,
+      bgMusic = document.getElementById('bg-music'),
+
+      enemies = [],
       score = 0,
       started = false
-  
-  var bgMusic = document.getElementById('bg-music')
+
   bgMusic.volume = 0.3
   bgMusic.play()
 
-  lover.canvas.setAttribute('width', canvas.width)
-  lover.canvas.setAttribute('height', canvas.height)
-  lover.mask.setAttribute('width', canvas.width)
-  lover.mask.setAttribute('height', canvas.height)
+  offscreenCanvas.setAttribute('width', canvas.width)
+  offscreenCanvas.setAttribute('height', canvas.height)
+  offscreenCanvas.offset = {
+    left : canvas.offsetLeft,
+    top : canvas.offsetTop
+  }
+
+  mask.setAttribute('width', canvas.width)
+  mask.setAttribute('height', canvas.height)
 
   Player.breathBarGradient =
-    lover.context.createLinearGradient(0, 0, 0, canvas.height)
+    offscreenContext.createLinearGradient(0, 0, 0, canvas.height)
   Player.breathBarGradient.addColorStop(0, '#5fffff')
   Player.breathBarGradient.addColorStop(1, '#7db9e8')
 
-  var maskContext = lover.mask.getContext('2d'),
-      underWaterGradient =
-        maskContext.createLinearGradient(0, 0, 0, canvas.height)
+  var underWaterGradient =
+        offscreenContext.createLinearGradient(0, 0, 0, canvas.height)
   underWaterGradient.addColorStop(0, '#1e5799')
   underWaterGradient.addColorStop(0.2, '#207cca')
   underWaterGradient.addColorStop(1, '#7db9e8')
-  maskContext.globalAlpha = 0.6
-  maskContext.fillStyle = underWaterGradient
-  maskContext.fillRect(0, 0, canvas.width, canvas.height)
-  
-  gotoPrepareScreen()
 
-  window.setInterval(spawnEnemy, 5000)
+  gotoPromptScreen()
 
-  window.addEventListener('keydown', function (e) {
-    switch (e.keyCode) {
-    case 37:
-      leftKeyDown = true
-      break
-    case 38:
-      upKeyDown = true
-      break
-    case 39:
-      rightKeyDown = true
-      break
-    case 40:
-      downKeyDown = true
-      break
-    default:
-      return true
-    }
-    e.preventDefault()
-  }, true);
-
-  window.addEventListener('keyup', function (e) {
-    switch (e.keyCode) {
-    case 37:
-      leftKeyDown = false
-      break
-    case 38:
-      upKeyDown = false
-      break
-    case 39:
-      rightKeyDown = false
-      break
-    case 40:
-      downKeyDown = false
-      break
-    default:
-      return true
-    }
-    e.preventDefault()
-  }, true);
-
-  window.addEventListener("mousemove", function (e) {
-    if (!hasFocus) {
-      cursorOnScreen = false
-      female.huggingLover = false
-      return
-    }
-    var x = e.pageX - canvas.offsetLeft
-    var y = e.pageY - canvas.offsetTop
-    if (0 < x && x < canvas.width && 0 < y && y < canvas.height) {
-      cursorOnScreen = true
-      cursorX = x
-      cursorY = y
-      e.preventDefault()
-    } else {
-      cursorOnScreen = false
-      if (female)
-        female.moving = false
-    }
-  }, true)
-
-  window.addEventListener("focus", function (e) {
-    hasFocus = true
-    leftKeyDown = upKeyDown = rightKeyDown = downKeyDown = false
-    if (female)
-      female.moving = false
-  }, true)
-
-  window.addEventListener("blur", function (e) {
-    hasFocus = false
-    leftKeyDown = upKeyDown = rightKeyDown = downKeyDown = false
-    if (female)
-      female.moving = false
-  }, true)
+  window.setInterval(spawnEnemy, 7500)
 
   // Main logic layer loop.
   var mainUpdater = window.setInterval(function () {
@@ -140,7 +62,7 @@ lover.context = lover.canvas.getContext('2d')
     refresh()
   }, 50)
 
-  function gotoPrepareScreen() {
+  function gotoPromptScreen() {
     started = false
     var clickToContinue = window.addEventListener("click", cont)
     var pressToContinue = window.addEventListener("keypress", cont)
@@ -156,13 +78,14 @@ lover.context = lover.canvas.getContext('2d')
   }
 
   function restart() {
-    male = new Player(randInt(0, canvas.width / 2), randInt(0, canvas.height),
-                      16, "male", "img/male.png"),
-    female = new Player(randInt(canvas.width / 2, canvas.width),
-                        randInt(0, canvas.height), 16, "female", "img/female.png")
+    var randInt = Lover.randInt
+    Lover.male = new Player(randInt(0, canvas.width / 2), randInt(0, canvas.height),
+      16, "male", "img/male.png"),
+    Lover.female = new Player(randInt(canvas.width / 2, canvas.width),
+      randInt(0, canvas.height), 16, "female", "img/female.png")
     enemies = []
     // Spawn enemies.
-    for (var i = 0; i < 20; ++i)
+    for (var i = 0; i < 10; ++i)
       spawnEnemy()
     started = true
     score = 0
@@ -199,6 +122,7 @@ lover.context = lover.canvas.getContext('2d')
   }
 
   function refresh() {
+    var male = Lover.male, female = Lover.female
     var sprites = enemies.slice(0)
     if (male)
       sprites.push(male)
@@ -211,18 +135,18 @@ lover.context = lover.canvas.getContext('2d')
       sprite.draw()
     })
     drawFullscreenMask()
-    if (male)
+    if (started) {
       male.drawBreathBar()
-    if (female)
       female.drawBreathBar()
+    }
     drawScore()
     if (!started)
-      drawPrepareScreen()
-    context.drawImage(lover.canvas, 0, 0)
+      drawPromptScreen()
+    context.drawImage(offscreenCanvas, 0, 0)
   }
 
-  function drawPrepareScreen() {
-    var context = lover.context
+  function drawPromptScreen() {
+    var context = Lover.context
     context.fillStyle = "black"
     context.fillRect(0, 0, canvas.width, canvas.height)
     var x = canvas.width / 2
@@ -238,14 +162,14 @@ lover.context = lover.canvas.getContext('2d')
   }
 
   function drawFullscreenMask() {
-    var context = lover.context
+    var context = Lover.context
     context.globalAlpha = 0.5
     context.fillStyle = underWaterGradient
     context.fillRect(0, 0, canvas.width, canvas.height)
   }
 
   function drawScore() {
-    var context = lover.context
+    var context = Lover.context
     context.font = "30pt Arial";
     context.textAlign = "center";
     context.fillStyle = "rgb(10,80,255)";
@@ -254,6 +178,7 @@ lover.context = lover.canvas.getContext('2d')
   }
 
   function checkEnemyCollisions() {
+    var male = Lover.male, female = Lover.female
     enemies.forEach(function (enemy) {
       if (male.colliding(enemy))
         male.die()
@@ -263,42 +188,43 @@ lover.context = lover.canvas.getContext('2d')
   }
 
   function updateScore() {
-    if (male.alive || female.alive) {
-      score += randInt(1, 11)
+    if (Lover.male.alive || Lover.female.alive) {
+      score += Lover.randInt(1, 11)
     } else if (started) {
       var highscores = JSON.parse(localStorage.highscores)
       highscores.push(score)
       highscores.sort(function (a, b) { return b - a })
       localStorage.highscores = JSON.stringify(highscores.slice(0, 10))
-      gotoPrepareScreen()
+      gotoPromptScreen()
     }
   }
 
   function updateMalePosition() {
+    var male = Lover.male
     if (!male.alive)
       return
     male.moving = true
-    if (leftKeyDown)
+    if (Lover.leftKeyDown)
       male.moveLeft()
-    else if (rightKeyDown)
+    else if (Lover.rightKeyDown)
       male.moveRight()
-    else if (upKeyDown)
+    else if (Lover.upKeyDown)
       male.moveUp()
-    else if (downKeyDown)
+    else if (Lover.downKeyDown)
       male.moveDown()
     else {
       male.moving = false
     }
 
-    if (male.colliding(female)) {
+    if (male.colliding(Lover.female)) {
       male.huggingLover = true
-      if (leftKeyDown)
+      if (Lover.leftKeyDown)
         male.undoMoveLeft()
-      else if (rightKeyDown)
+      else if (Lover.rightKeyDown)
         male.undoMoveRight()
-      else if (upKeyDown)
+      else if (Lover.upKeyDown)
         male.undoMoveUp()
-      else if (downKeyDown)
+      else if (Lover.downKeyDown)
         male.undoMoveDown()
       male.moving = false
     } else {
@@ -307,12 +233,13 @@ lover.context = lover.canvas.getContext('2d')
   }
 
   function updateFemalePosition() {
+    var female = Lover.female, mouseOnScreen = Lover.mouseOnScreen
     if (!female.alive)
       return
     var direction
-    if (cursorOnScreen)
-      direction = female.followCursor(cursorX, cursorY)
-    if (female.colliding(male) && cursorOnScreen) {
+    if (mouseOnScreen)
+      direction = female.followCursor(Lover.mouseX, Lover.mouseY)
+    if (female.colliding(Lover.male) && mouseOnScreen) {
       female.huggingLover = true
       female.undoMove(direction)
     } else {
@@ -322,7 +249,7 @@ lover.context = lover.canvas.getContext('2d')
 
   function updateRecoverySound() {
     var sound = document.getElementById('recovery-sound')
-    if (male.huggingLover || female.huggingLover)
+    if (Lover.male.huggingLover || Lover.female.huggingLover)
       sound.play()
     else
       sound.pause()
@@ -335,7 +262,7 @@ lover.context = lover.canvas.getContext('2d')
   }
 
   function updateBreaths() {
-    male.updateBreath()
-    female.updateBreath()
+    Lover.male.updateBreath()
+    Lover.female.updateBreath()
   }
 })()
