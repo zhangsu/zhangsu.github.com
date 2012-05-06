@@ -39,14 +39,20 @@
       }
 
       #name {
-        font-size: 18pt;
+        font-size: 26pt;
         font-weight: bold;
-        line-height: 24pt;
+        line-height: 30pt;
       }
 
       #info {
-        font-size: 10pt;
-        line-height: 13pt;
+        font-size: 11pt;
+        line-height: 14pt;
+        margin: 20pt 0;
+      }
+
+      #info_left, #info_center, #info_right {
+        display: inline-block;
+        margin: 0 20pt 0 20pt;
       }
 
       .header {
@@ -89,12 +95,18 @@
       <div id='profile'>
         <div id='name'>Su Zhang</div>
         <div id='info'>
-          <div id='level'>3A Honours Computer Science</div>
-          <div id='street'>24 Cardill Cres</div>
-          <div id='city_province_postal_code'>Waterloo, ON, N2L3Y8</div>
-          <div id='phone'>(226)808-1426</div>
-          <div id='email'><a href='mailto:0x82cf@gmail.com'>0x82cf@gmail.com</a></div>
-          <div id='github'><a href='https://github.com/zhangsu'>github.com/zhangsu</a></div>
+          <div id='info_left'>
+            <div id='phone'>(226)808-1426</div>
+            <div id='email'><a href='mailto:0x82cf@gmail.com'>0x82cf@gmail.com</a></div>
+          </div>
+          <div id='info_center'>
+            <div id='level'>3A Computer Science</div>
+            <div id='github'><a href='https://github.com/zhangsu'>github.com/zhangsu</a></div>
+          </div>
+          <div id='info_right'>
+            <div id='street'>24 Cardill Cres</div>
+            <div id='city_province_postal_code'>Waterloo, ON, N2L3Y8</div>
+          </div>
         </div>
       </div>
 
