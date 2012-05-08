@@ -1,8 +1,58 @@
+@mixin transition($params)
+  -webkit-transition: #{$params}
+  -moz-transition: #{$params}
+  -ms-transition: #{$params}
+  -o-transition: #{$params}
+  transition: #{$params}
+
+@mixin transform($params)
+  -webkit-transform: #{$params}
+  -moz-transform: #{$params}
+  -ms-transform: #{$params}
+  -o-transform: #{$params}
+  transform: #{$params}
+
+@mixin scale($scale)
+  @include transform("scale(#{$scale})")
+
+@mixin linear_gradient($params)
+  background: -moz-linear-gradient(#{$params})
+  background: -webkit-linear-gradient(#{$params})
+  background: -o-linear-gradient(#{$params})
+  background: -ms-linear-gradient(#{$params})
+  background: linear-gradient(#{$params})
+
 @font-face
   font-family: theme
   src: url('fonts/theme.ttf')
 
+a
+  text-decoration: none
+
 body
+  background-color: #ccc
+
+#scroll
+  $grad_outer: #aaa
+  $grad_inner: #f2f2f2
+  $grad_size: 4%
   font:
-    family: theme
-    size: 50px
+    family: theme, consolas, monospace
+    size: 40px
+  text-align: center
+  background: $grad_outer
+  @include linear_gradient("left, #{$grad_outer} 0%, #{$grad_inner} #{$grad_size}, #{$grad_inner} #{100% - $grad_size}, #{$grad_outer} 100%")
+  width: 800px
+  margin: 0 auto
+
+#name
+  font-size: 90px
+
+.heading
+  font-size: 70px
+  line-height: 80px
+
+  @include transition("font-size 0.5s")
+
+  &:hover
+    font-size: 80px
