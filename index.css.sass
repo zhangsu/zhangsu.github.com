@@ -56,31 +56,24 @@ body
 
     @include linear-gradient("top, black 0%, gray 50%, black 100%")
 
-  .roll-mask
-    width: $roll-width
-    height: $roll-height
-    overflow: hidden
-    box-shadow: 0 14px 12px -10px gray
-    border-radius: $roll-height / 2
-    margin: 0 auto
-
   .roll
     $color: #666
     $color-light: #bbb
-    $offset: 5px
-    $height: $roll-height + $offset * 2
-    $border-size: 1px
-    $border: $border-size solid gray
+    $border: 1px solid gray
 
-    width: $roll-width - $border-size * 2
-    height: $height
-    border-radius: $height / 2
+    width: 96%
+    height: 100%
+    border-radius: 1.5% / 50%
     border:
       left: $border
       right: $border
     margin: 0 auto
-    position: relative
-    top: -$offset
+    box-shadow: 0 14px 12px -10px gray
+    position: absolute
+    top: 0
+    bottom: 0
+    left: 1px
+    right: 1px
 
     @include linear-gradient("top, #{$color} 0%, #{$color-light} 50%, #{$color} 100%")
 
