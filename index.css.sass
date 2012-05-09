@@ -34,25 +34,25 @@ a
 body
   background-color: #ccc
 
-.roll-container
-  $roll-width: 840px
-  $roll-height: 40px
-  $axis-width: 880px
-
-  width: $axis-width
-  height: $roll-height
+#container
+  width: $scroll-width
   margin: 0 auto
+
+.roll-container
+  $roll-height: 40px
+
+  display: table-cell
+  vertical-align: middle
+  height: $roll-height
   position: relative
 
   .axis
     $height: $roll-height / 2
 
-    width: $axis-width
+    width: $scroll-width
     height: $height
     border-radius: $height / 2
     box-shadow: 0px 8px 8px -4px gray
-    position: absolute
-    top: ($roll-height - $height) / 2
 
     @include linear-gradient("top, black 0%, gray 50%, black 100%")
 
@@ -86,9 +86,9 @@ body
     family: theme, consolas, monospace
     size: 40px
   text-align: center
-  width: $scroll-width
-  margin: 0 auto
+  width: 90%
   box-shadow: 3px 0 20px gray
+  margin: 0 auto
 
   @include linear-gradient("left, #{$grad-outer} 0%, #{$grad-inner} #{$grad-size}, #{$grad-inner} #{100% - $grad-size}, #{$grad-outer} 100%")
 
