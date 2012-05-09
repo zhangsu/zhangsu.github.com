@@ -34,24 +34,43 @@ a
 body
   background-color: #ccc
 
-.scroll-roll
+.roll-container
   $roll-width: 840px
   $roll-height: 40px
+  $axis-width: 880px
 
   overflow: hidden
-  width: $roll-width
+  width: $axis-width
   height: $roll-height
   margin: 0 auto
+  position: relative
 
-  .scroll-roll-bg
+  .axis
+    $height: $roll-height / 2
+
+    width: $axis-width
+    height: $height
+    border-radius: $height / 2
+    position: absolute
+    top: ($roll-height - $height) / 2
+
+    @include linear-gradient("top, black 0%, gray 50%, black 100%")
+
+  .roll
     $color: #666
     $color-light: #bbb
     $offset: 5px
     $height: $roll-height + $offset * 2
+    $border-size: 1px
+    $border: $border-size solid gray
 
-    width: $roll-width
+    width: $roll-width - $border-size * 2
     height: $height
     border-radius: $height / 2
+    border:
+      left: $border
+      right: $border
+    margin: 0 auto
     position: relative
     top: -$offset
 
