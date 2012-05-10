@@ -1,8 +1,16 @@
 $(window).load ->
   $scroll = $('#scroll')
+  $roll = $('#container .roll-container:last')
   scrollHeight = $scroll.height()
+  rollHeight = $roll.height()
   $scroll.height(scrollHeight)
   setTimeout ->
-    $scroll.addClass('sliding')
+    $scroll.addClass('scrolling')
+
   $('.roll').click ->
-    $scroll.height(if $scroll.height() > 0 then 0 else scrollHeight)
+    if $scroll.height() > 0
+      $scroll.height(0)
+      $roll.addClass('collapsed')
+    else
+      $scroll.height(scrollHeight)
+      $roll.removeClass('collapsed')

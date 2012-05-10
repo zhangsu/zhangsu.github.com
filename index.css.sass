@@ -27,6 +27,8 @@
   src: url('fonts/theme.ttf')
 
 $scroll-width: 800px
+$scrolling-duration: 2s
+$scrolling-timing: ease-in-out
 
 a
   text-decoration: none
@@ -45,6 +47,8 @@ body
   vertical-align: middle
   height: $roll-height
   position: relative
+
+  @include transition("height #{$scrolling-duration} #{$scrolling-timing}")
 
   .axis
     $height: $roll-height / 2
@@ -76,9 +80,17 @@ body
     right: 1px
 
     @include linear-gradient("top, #{$color} 0%, #{$color-light} 50%, #{$color} 100%")
+    @include transition("width #{$scrolling-duration} #{$scrolling-timing}")
 
     &:hover
       @include linear-gradient("top, #{$color+16} 0%, #{$color-light+16} 50%, #{$color+16} 100%")
+
+  &.collapsed
+    height: $roll-height + 30px
+
+    .roll
+      width: 98%
+
 
 #scroll
   $grad-outer: #aaa
@@ -96,8 +108,8 @@ body
 
   @include linear-gradient("left, #{$grad-outer} 0%, #{$grad-inner} #{$grad-size}, #{$grad-inner} #{100% - $grad-size}, #{$grad-outer} 100%")
 
-#scroll.sliding
-  @include transition("height 0.7s")
+#scroll.scrolling
+  @include transition("height #{$scrolling-duration} #{$scrolling-timing}")
 
 #scroll-content
   padding: 30px
