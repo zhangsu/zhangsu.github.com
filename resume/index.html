@@ -50,7 +50,7 @@
         margin: 20pt 0;
       }
 
-      #info_left, #info_center, #info_right {
+      #info-left, #info-center, #info-right {
         display: inline-block;
         margin: 0 20pt 0 20pt;
       }
@@ -73,14 +73,10 @@
       }
       
       .title {
-        font-weight: bold;
-      }
-
-      .left_align {
         float: left;
       }
 
-      .right_align {
+      .date {
         float: right;
         font-style: italic;
       }
@@ -141,17 +137,17 @@
       <div id='profile'>
         <div id='name'>Su Zhang</div>
         <div id='info'>
-          <div id='info_left'>
+          <div id='info-left'>
             <div id='phone'>(226)808-1426</div>
             <div id='email'><a href='mailto:me@zhang.su'>me@zhang.su</a></div>
           </div>
-          <div id='info_center'>
+          <div id='info-center'>
             <div id='level'>3A Computer Science</div>
             <div id='github'><a href='https://github.com/zhangsu'>github.com/zhangsu</a></div>
           </div>
-          <div id='info_right'>
+          <div id='info-right'>
             <div id='street'>24 Cardill Cres</div>
-            <div id='city_province_postal_code'>Waterloo, ON, N2L3Y8</div>
+            <div id='city-province-postal-code'>Waterloo, ON, N2L3Y8</div>
           </div>
         </div>
       </div>
@@ -159,7 +155,7 @@
       <div id='skills'>
         <div class='header'>SKILLS</div>
 
-        <div id='skill_cloud'>
+        <div id='skill-cloud'>
           <div class='t1'>Ruby</div><!--
        --><div class='t1'>C</div><!--
        --><div class='t4'>JavaScript</div><!--
@@ -205,8 +201,8 @@
         <div class='header'>EXPERIENCE</div>
         <div class='content'>
 
-          <div class='left_align'><span class='title'>Rockstar Software Developer</span>, Uken Games, Toronto, ON</div>
-          <div class='right_align'>Jan. 2012 - Apr. 2012</div>
+          <div class='title'><b>Rockstar Software Developer</b>, Uken Games, Toronto, ON</div>
+          <div class='date'>Jan. 2012 - Apr. 2012</div>
           <div class='under_floating_title'>
             <ul>
               <li>Developed game logic for servers powered by Ruby on Rails and MySQL</li>
@@ -218,8 +214,8 @@
             </ul>
           </div>
 
-          <div class='left_align'><span class='title'>Software Engineering</span>, Harris Canada Systems Inc., Toronto, ON</div>
-          <div class='right_align'>May 2011 - Aug. 2011</div>
+          <div class='title'><b>Software Engineering</b>, Harris Canada Systems Inc., Toronto, ON</div>
+          <div class='date'>May 2011 - Aug. 2011</div>
           <div class='under_floating_title'>
             <ul>
               <li>Designed GUI widgets and engineered bug fixes for MFC, GDI and ActiveX components using C++</li>
@@ -230,8 +226,8 @@
             </ul>
           </div>
 
-          <div class='left_align'><span class='title'>Software Developer</span>, NCR Canada Ltd, Waterloo, ON</div>
-          <div class='right_align'>Sep. 2010 - Dec. 2010</div>
+          <div class='title'><b>Software Developer</b>, NCR Canada Ltd, Waterloo, ON</div>
+          <div class='date'>Sep. 2010 - Dec. 2010</div>
           <div class='under_floating_title'>
             <ul>
               <li>Optimized Hibernate-based SQL queries to process extreme volumes of data from MSSQL</li>
@@ -246,8 +242,8 @@
       <div id='education' class='page_break'>
         <div class='header'>EDUCATION</div>
         <div class='content'>
-          <div class='left_align'><span class='title'>Bachelor of Computer Science</span>, University of Waterloo, Waterloo, ON</div>
-          <div class='right_align'>2009 - 2014</div>
+          <div class='title'><b>Bachelor of Computer Science</b>, University of Waterloo, Waterloo, ON</div>
+          <div class='date'>2009 - 2014</div>
           <div class='under_floating_title'>
             <ul>
               <li>Ranked number three in compiler optimization bonus for least executable size in the course "Foundations of Sequential Programs"</li>
@@ -260,24 +256,24 @@
         <div class='header'>ACTIVITIES</div>
         <div class='content'>
 
-          <div class='left_align'><span class='title'>This Resume</span></div>
-          <div class='right_align'>May. 2012</div>
+          <div class='title'><b>This Resume</b></div>
+          <div class='date'>May. 2012</div>
           <div class='under_floating_title'>
             <ul>
               <li>Updated using strict HTML 4.01 and CSS 2.1</li>
             </ul>
           </div>
 
-          <div class='left_align'><span class='title'>zhang.su</span></div>
-          <div class='right_align'>May. 2012</div>
+          <div class='title'><b>zhang.su</b></div>
+          <div class='date'>May. 2012</div>
           <div class='under_floating_title'>
             <ul>
-              <li>Built a homepage at <a href='http://zhang.su'>zhang.su</a> using Haml, Sass, CoffeeScript and CSS3 animations</li>
+              <li>Built homepage at <a href='http://zhang.su'>zhang.su</a> using Haml, Sass, CoffeeScript and CSS3 animations</li>
             </ul>
           </div>
 
-          <div class='left_align'><span class='title'>Lover</span></div>
-          <div class='right_align'>Apr. 2012</div>
+          <div class='title'><b>Lover</b></div>
+          <div class='date'>Apr. 2012</div>
           <div class='under_floating_title'>
             <ul>
               <li>Participated in Molyjam 2012, a hackathon for rapid prototyping of video games based on Peter Molyneux's striking game ideas</li>
@@ -285,8 +281,8 @@
             </ul>
           </div>
 
-          <div class='left_align'><span class='title'>Scorched End Audio Library (SEAL)</span></div>
-          <div class='right_align'>May 2011 - present</div>
+          <div class='title'><b>Scorched End Audio Library (SEAL)</b></div>
+          <div class='date'>May 2011 - present</div>
           <div class='under_floating_title'>
             <ul>
               <li>Coded with pure C to deliver efficient audio rendering in 3D space</li>
@@ -296,8 +292,8 @@
             </ul>
           </div>
 
-          <div class='left_align'><span class='title'>Sudoku and Sudoku Solver</span></div>
-          <div class='right_align'>Apr. 2010</div>
+          <div class='title'><b>Sudoku and Sudoku Solver</b></div>
+          <div class='date'>Apr. 2010</div>
           <div class='under_floating_title'>
             <ul>
               <li>Created form-based Sudoku game with Visual C# .NET</li>
@@ -305,8 +301,8 @@
             </ul>
           </div>
 
-          <div class='left_align'><span class='title'>Tetris</span></div>
-          <div class='right_align'>Jul. 2009</div>
+          <div class='title'><b>Tetris</b></div>
+          <div class='date'>Jul. 2009</div>
           <div class='under_floating_title'>
             <ul>
               <li>Replicated the Tetris game using C++, GDI and MFC</li>
@@ -314,8 +310,8 @@
             </ul>
           </div>
 
-          <div class='left_align'><span class='title'>Sword Master</span></div>
-          <div class='right_align'>Jan. 2007</div>
+          <div class='title'><b>Sword Master</b></div>
+          <div class='date'>Jan. 2007</div>
           <div class='under_floating_title'>
             <ul>
               <li>Made a 2D role-playing game "Sword Master" using Java AWT</li>
@@ -323,8 +319,8 @@
             </ul>
           </div>
 
-          <div class='left_align'><span class='title'>RPG Maker</span></div>
-          <div class='right_align'>2005 - 2010</div>
+          <div class='title'><b>RPG Maker</b></div>
+          <div class='date'>2005 - 2010</div>
           <div class='under_floating_title'>
             <ul>
               <li>Learned Ruby by playing with the Ruby scripting engine for RPG Maker, a software for making RPG</li>
