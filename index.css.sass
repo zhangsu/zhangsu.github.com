@@ -96,6 +96,9 @@ body
 
   @include linear-gradient("left, #{$grad-outer} 0%, #{$grad-inner} #{$grad-size}, #{$grad-inner} #{100% - $grad-size}, #{$grad-outer} 100%")
 
+#scroll.sliding
+  @include transition("height 0.7s")
+
 #scroll-content
   padding: 30px
 
