@@ -21,13 +21,21 @@
       }
 
       #container {
-        font-family: Consolas, Monaco, 'DejaVu Sans Mono', monospace;
+        font-family: Consolas, Monaco, Inconsolata, Arial;
+        font-size: 11pt;
+        line-height: 14pt;
         width: 190.5mm;
         margin: 0 auto;
       }
 
       #profile {
         text-align: center;
+        width: 100%;
+        border: 0;
+      }
+
+      #profile td {
+        width: 33%;
       }
 
       a {
@@ -39,33 +47,18 @@
       }
 
       #name {
-        font-size: 26pt;
+        font-size: 29pt;
         font-weight: bold;
-        line-height: 30pt;
-      }
-
-      #info {
-        font-size: 11pt;
-        line-height: 14pt;
-        margin: 20pt 0;
-      }
-
-      #info-left, #info-center, #info-right {
-        display: inline-block;
-        margin: 0 20pt 0 20pt;
+        line-height: 29pt;
+        margin-bottom: 16pt;
       }
 
       .heading {
-        font-size: 18pt;
+        font-size: 21pt;
         font-weight: bold;
         text-align: center;
-        line-height: 18pt;
-        margin: 22pt 0 14pt 0;
-      }
-
-      .content {
-        font-size: 10.5pt;
-        line-height: 13.5pt;
+        line-height: 21pt;
+        margin: 24pt 0 14pt 0;
       }
 
       .content > .under_floating_title {
@@ -73,6 +66,8 @@
       }
       
       .title {
+        font-size: 13pt;
+        line-height: 13pt;
         float: left;
       }
 
@@ -134,23 +129,27 @@
   <body>
     <div id='container'>
 
-      <div id='profile'>
-        <div id='name'>Su Zhang</div>
-        <div id='info'>
-          <div id='info-left'>
+      <table id='profile'>
+        <tr>
+          <td></td>
+          <td><div id='name'>Su Zhang</div></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>
             <div id='phone'>(226)808-1426</div>
             <div id='email'><a href='mailto:me@zhang.su'>me@zhang.su</a></div>
-          </div>
-          <div id='info-center'>
+          </td>
+          <td>
             <div id='level'>3A Computer Science</div>
             <div id='github'><a href='https://github.com/zhangsu'>github.com/zhangsu</a></div>
-          </div>
-          <div id='info-right'>
+          </td>
+          <td>
             <div id='street'>24 Cardill Cres</div>
             <div id='city-province-postal-code'>Waterloo, ON, N2L3Y8</div>
-          </div>
-        </div>
-      </div>
+          </td>
+        </tr>
+      </table>
 
       <div id='skills'>
         <div class='heading'>Skills</div>
