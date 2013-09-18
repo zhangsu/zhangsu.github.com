@@ -1,13 +1,13 @@
 guard :haml, output: 'deploy', haml_options: { ugly: true } do
-  watch /^.+(\.html\.haml)$/
+  watch /^.+\.haml$/
 end
 
-guard :sass, output: 'deploy', extension: '', style: :compressed do
-  watch /^.+(\.css\.s[ac]ss)$/
+guard :sass, output: 'deploy', style: :compressed do
+  watch /^.+\.s[ac]ss$/
 end
 
 guard 'coffeescript', output: 'deploy' do
-  watch /^.+(\.js\.coffee)$/
+  watch /^.+\.coffee$/
 end
 
 guard 'uglify', :destination_file => "deploy/index.js" do
