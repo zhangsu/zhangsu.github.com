@@ -1,5 +1,5 @@
-guard :haml, output: 'deploy', haml_options: { ugly: true } do
-  watch /^.+\.haml$/
+guard :slim, output_root: 'deploy', slim: { pretty: false } do
+  watch /^.+\.slim$/
 end
 
 guard :sass, output: 'deploy', style: :compressed do
