@@ -1,3 +1,4 @@
 [submodule "deploy"]
-	path = deploy
-	url = git@github.com:zhangsu/zhangsu.github.com.git
+  path = deploy
+  url = git@github.com:zhangsu/zhangsu.github.com.git
+  branch = master
