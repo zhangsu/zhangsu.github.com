@@ -43,6 +43,11 @@ body
 
 .roll-container
   $roll-height: 40px
+  $roll-height-ratio: 1.75
+  $v-shadow: 14px
+  $shadow-blur: 12px
+  $shadow-spread: -10px
+  $shadow-color: gray
 
   width: 100%
   height: $roll-height
@@ -75,7 +80,7 @@ body
       left: $border
       right: $border
     margin: 0 auto
-    box-shadow: 0 14px 12px -10px gray
+    box-shadow: 0 $v-shadow $shadow-blur $shadow-spread $shadow-color
     position: absolute
     top: 0
     bottom: 0
@@ -89,7 +94,7 @@ body
       @include linear-gradient("top, #{$color+16} 0%, #{$color-light+16} 50%, #{$color+16} 100%")
 
   &.collapsed
-    height: $roll-height + 30px
+    height: $roll-height * $roll-height-ratio
 
     .roll
       width: 98%
