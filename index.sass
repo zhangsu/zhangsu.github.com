@@ -23,8 +23,8 @@
   background: linear-gradient(#{$params})
 
 @font-face
-  font-family: theme
-  src: url('fonts/theme.ttf')
+  font-family: cursive
+  src: url('fonts/Champignon.ttf')
 
 $scroll-width: 800px
 $scrolling-duration: 2s
@@ -32,6 +32,11 @@ $scrolling-timing: ease-in-out
 
 a
   text-decoration: none
+  color: #77f
+  transition: color 0.25s linear
+
+  &:hover
+    color: #44f
 
 body
   background-color: #ccc
@@ -106,8 +111,8 @@ body
   $grad-size: 4%
 
   font:
-    family: theme, consolas, monospace
-    size: 40px
+    family: Serif
+    style: italic
   text-align: center
   width: 91%
   overflow: hidden
@@ -123,20 +128,10 @@ body
   padding: 30px
 
 #name
-  font-size: 90px
-
-.heading
-  $hover-size: 80px
-
-  display: inline-block
-  font-size: 70px
-  line-height: $hover-size
-  margin-top: 20px
-
-  @include transition("font-size 0.5s")
-
-  &:hover
-    font-size: $hover-size
+  font:
+    family: cursive, serif
+    size: 4em
+    weight: normal
 
 .hint
   font-size: 30px
