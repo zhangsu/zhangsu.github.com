@@ -35,9 +35,21 @@ body
   background-color: #ccc
   overflow-y: scroll
 
+.arrow
+  $size: 8px
+
+  border-left: $size solid transparent
+  border-right: $size solid transparent
+  border-bottom: $size solid black
+  display: inline-block
+  height: 0
+  transition: border 1s
+  width: 0
+
 #container
   width: $scroll-width
   margin: 0 auto
+  text-align: center
 
 .roll-container
   $roll-height: 40px
@@ -98,6 +110,9 @@ body
       width: 98%
       box-shadow: 0 $v-shadow * $roll-height-ratio $shadow-blur * $roll-height-ratio $shadow-spread $shadow-color
 
+      .arrow
+        border-color: transparent
+
 #scroll
   $grad-outer: #ab733f
   $grad-inner: #ffdbaa
@@ -106,7 +121,6 @@ body
   font:
     family: Serif
     style: italic
-  text-align: center
   width: 91%
   overflow: hidden
   box-shadow: 3px 0 20px gray
@@ -125,8 +139,3 @@ body
     family: cursive-en, serif
     size: 4em
     weight: normal
-
-.hint
-  font-size: 30px
-  color: gray
-  margin-top: 40px
