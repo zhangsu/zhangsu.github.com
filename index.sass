@@ -88,7 +88,7 @@ body
     right: 1px
 
     @include linear-gradient("top, #{$color} 0%, #{$color-light} 50%, #{$color} 100%")
-    @include transition("width #{$scrolling-duration} #{$scrolling-timing}")
+    @include transition("width #{$scrolling-duration} #{$scrolling-timing}, box-shadow #{$scrolling-duration} #{$scrolling-timing}")
 
     &:hover
       @include linear-gradient("top, #{$color+16} 0%, #{$color-light+16} 50%, #{$color+16} 100%")
@@ -98,7 +98,7 @@ body
 
     .roll
       width: 98%
-
+      box-shadow: 0 $v-shadow * $roll-height-ratio $shadow-blur * $roll-height-ratio $shadow-spread $shadow-color
 
 #scroll
   $grad-outer: #aaa
