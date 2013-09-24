@@ -15,6 +15,14 @@
   background: -ms-linear-gradient(#{$params})
   background: linear-gradient(#{$params})
 
+@mixin user-select($params)
+  -webkit-touch-callout: $params
+  -webkit-user-select: $params
+  -khtml-user-select: $params
+  -moz-user-select: $params
+  -ms-user-select: $params
+  user-select: $params
+
 @font-face
   font-family: cursive-en
   src: url('fonts/Champignon.ttf')
@@ -127,6 +135,7 @@ body
   margin: 0 auto
 
   @include linear-gradient("left, #{$grad-outer} 0%, #{$grad-inner} #{$grad-size}, #{$grad-inner} #{100% - $grad-size}, #{$grad-outer} 100%")
+  @include user-select(none)
 
 #scroll.scrolling
   transition: height $scrolling-duration $scrolling-timing
