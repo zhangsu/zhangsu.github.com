@@ -32,6 +32,18 @@
   src: url('fonts/蒙纳囍宴体.ttf')
   unicode-range: U+4E00-9FCC
 
+@mixin text-blink
+  from
+    color: #000
+  to
+    color: #aaa
+
+@-webkit-keyframes text-blink
+  @include text-blink
+
+@keyframes text-blink
+  @include text-blink
+
 $scroll-width: 800px
 $scrolling-duration: 2s
 $scrolling-timing: ease-in-out
@@ -149,10 +161,22 @@ body
   padding: 30px
 
 #name
+  @mixin animation
+    name: text-blink
+    duration: 2s
+    timing-function: ease-in
+    iteration-count: infinite
+    direction: alternate
+
   font:
     size: 4em
     weight: normal
     style: normal
+
+  -webkit-animation:
+    @include animation
+  animation:
+    @include animation
 
   .en
     font-family: cursive-en, cursive, serif
