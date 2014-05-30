@@ -160,7 +160,7 @@ body
 #scroll-content
   padding: 30px
 
-#name
+#en-name, #ch-name
   @mixin animation
     name: text-blink
     duration: 2s
@@ -178,8 +178,10 @@ body
   animation:
     @include animation
 
-  .en
-    font-family: cursive-en, cursive, serif
+#en-name
+  font-family: cursive-en, cursive, serif
+  margin-bottom: 0
 
-  .ch
-    font-family: cursive-ch, cursive, serif
+#ch-name
+  font-family: cursive-ch, cursive, serif
+  margin-top: 0
