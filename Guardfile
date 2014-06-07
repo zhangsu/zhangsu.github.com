@@ -10,6 +10,6 @@ guard 'coffeescript', output: 'deploy' do
   watch /^.+\.coffee$/
 end
 
-guard 'uglify', :destination_file => "deploy/index.js" do
+guard 'uglify', destination_file: 'deploy/index.js' do
   watch 'deploy/index.js'
 end
