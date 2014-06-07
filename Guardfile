@@ -10,6 +10,7 @@ guard 'coffeescript', output: 'deploy' do
   watch /^.+\.coffee$/
 end
 
-guard 'uglify', destination_file: 'deploy/index.js' do
-  watch 'deploy/index.js'
+js_file = 'deploy/index.js'
+guard 'uglify', input: js_file, output: 'deploy/index.min.js' do
+  watch js_file
 end
