@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/pferdefleisch/guard-uglify.git
+  revision: 34238afa4a3f44ddf13462bb29ee512714663cec
+  specs:
+    guard-uglify (0.2.0)
+      guard (>= 0.2.2)
+      uglifier
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -27,9 +35,6 @@ GEM
     guard-slim (0.0.1)
       guard (>= 0.4.0)
       slim
-    guard-uglify (0.1.0)
-      guard (>= 0.2.2)
-      uglifier
     json (1.8.1)
     listen (2.7.7)
       celluloid (>= 0.15.2)
@@ -71,4 +76,4 @@ DEPENDENCIES
   guard-coffeescript
   guard-sass
   guard-slim
-  guard-uglify
+  guard-uglify!
