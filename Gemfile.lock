@@ -1,11 +1,3 @@
-GIT
-  remote: git://github.com/pferdefleisch/guard-uglify.git
-  revision: 34238afa4a3f44ddf13462bb29ee512714663cec
-  specs:
-    guard-uglify (0.2.0)
-      guard (>= 0.2.2)
-      uglifier
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -35,20 +27,23 @@ GEM
     guard-slim (0.0.1)
       guard (>= 0.4.0)
       slim
+    guard-uglify (0.2.0)
+      guard (>= 0.2.2)
+      uglifier
     json (1.8.1)
-    listen (2.7.7)
+    listen (2.7.8)
       celluloid (>= 0.15.2)
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9)
     lumberjack (1.0.6)
     method_source (0.8.2)
-    pry (0.9.12.6)
-      coderay (~> 1.0)
-      method_source (~> 0.8)
+    pry (0.10.0)
+      coderay (~> 1.1.0)
+      method_source (~> 0.8.1)
       slop (~> 3.4)
-    pry (0.9.12.6-x86-mingw32)
-      coderay (~> 1.0)
-      method_source (~> 0.8)
+    pry (0.10.0-x86-mingw32)
+      coderay (~> 1.1.0)
+      method_source (~> 0.8.1)
       slop (~> 3.4)
       win32console (~> 1.3)
     rb-fsevent (0.9.4)
@@ -76,4 +71,4 @@ DEPENDENCIES
   guard-coffeescript
   guard-sass
   guard-slim
-  guard-uglify!
+  guard-uglify
